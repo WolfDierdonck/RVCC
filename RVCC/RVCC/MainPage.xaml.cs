@@ -16,6 +16,30 @@ namespace RVCC
         public MainPage()
         {
             InitializeComponent();
+            var tapBluetooth = new TapGestureRecognizer();
+            tapBluetooth.Tapped += (s, e) =>
+            {
+                BluetoothClicked();
+            };
+            bluetoothText.GestureRecognizers.Add(tapBluetooth); 
+            bluetoothImage.GestureRecognizers.Add(tapBluetooth);
+
+            var tapMicrophone = new TapGestureRecognizer();
+            tapMicrophone.Tapped += (s, e) =>
+            {
+                RecordAudio();
+            };
+            microphoneText.GestureRecognizers.Add(tapMicrophone);
+            microphoneImage.GestureRecognizers.Add(tapMicrophone);
+        }
+        private void BluetoothClicked()
+        {
+            Console.WriteLine("yeet");
+        }
+
+        async void RecordAudio()
+        {
+            Console.WriteLine("yeet2");
         }
     }
 }
