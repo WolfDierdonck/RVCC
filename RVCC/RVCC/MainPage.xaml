@@ -7,7 +7,7 @@
              x:Class="RVCC.MainPage">
 
     <StackLayout>
-        <Grid RowSpacing="30">
+        <Grid RowSpacing="25">
             <Grid.RowDefinitions>
                 <RowDefinition Height="350" />
                 <RowDefinition Height="*" />
@@ -22,7 +22,6 @@
 
             <Image x:Name="bluetoothImage" Source="bluetoothIcon" Grid.Row="1" Grid.Column="0" HeightRequest="20" HorizontalOptions="End" VerticalOptions="Start" TranslationX="-30"/>
             <Label x:Name="bluetoothText" Text="Pair Bluetooth" Grid.Row="1" Grid.Column="1" HorizontalOptions="Start" VerticalOptions="Start" TranslationX="-30" />
-
 
         </Grid>
     </StackLayout>
