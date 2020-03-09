@@ -5,6 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Xamarin.Forms;
+using RVCC;
 
 namespace RVCC
 {
@@ -13,6 +14,9 @@ namespace RVCC
     [DesignTimeVisible(false)]
     public partial class MainPage : ContentPage
     {
+
+        public static MainViewModel ViewModel => App.ViewModel;
+
         public MainPage()
         {
             InitializeComponent();
@@ -34,7 +38,7 @@ namespace RVCC
         }
         private void BluetoothClicked()
         {
-            Console.WriteLine("yeet");
+            ViewModel.BluetoothTextColor = Color.LightGray;
             
         }
 

@@ -2,7 +2,7 @@
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
 
-namespace NFCProject.Pages
+namespace RVCC
 {
     public class BaseBind : INotifyPropertyChanged
     {

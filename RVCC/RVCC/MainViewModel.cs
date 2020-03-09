@@ -1,23 +1,24 @@
 ﻿using System.ComponentModel;
 using Xamarin.Forms;
 using System;
+using RVCC;
 
-namespace NFCProject.Pages
+namespace RVCC
 {
-    public class ReadViewModel : BaseBind
+    public class MainViewModel : BaseBind
     {
-        public ReadViewModel()
+        public MainViewModel()
         {
-            PageBackColor = Color.White;
+            BluetoothTextColor = Color.Green;
         }
 
-        private Color pageBackColor;
-        public Color PageBackColor
+        private Color bluetoothTextColor;
+        public Color BluetoothTextColor
         {
-            get { return pageBackColor; }
+            get { return bluetoothTextColor; }
             set
             {
-                SetProperty(ref pageBackColor, value);
+                SetProperty(ref bluetoothTextColor, value);
             }
         }
     }

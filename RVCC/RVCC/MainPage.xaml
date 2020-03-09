@@ -17,7 +17,7 @@
                 <ColumnDefinition Width="*" />
             </Grid.ColumnDefinitions>
 
-            <Image x:Name="microphoneImage" Source="microphoneIcon" Grid.Row="0" Grid.Column="0" HeightRequest="40" HorizontalOptions="End" VerticalOptions="End" TranslationX="-40" BackgroundColor="{Binding PageBackColor}"/>
+            <Image x:Name="microphoneImage" Source="microphoneIcon" Grid.Row="0" Grid.Column="0" HeightRequest="40" HorizontalOptions="End" VerticalOptions="End" TranslationX="-40" BackgroundColor="{Binding BluetoothTextColor}"/>
             <Label x:Name="microphoneText" Text="Record Audio" Grid.Row="0" Grid.Column="1" HorizontalOptions="Start" VerticalOptions="End" TranslationX="-40" FontSize="Large"/>
 
             <Image x:Name="bluetoothImage" Source="bluetoothIcon" Grid.Row="1" Grid.Column="0" HeightRequest="20" HorizontalOptions="End" VerticalOptions="Start" TranslationX="-30"/>
