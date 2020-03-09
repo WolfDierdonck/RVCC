@@ -35,6 +35,7 @@ namespace RVCC
         private void BluetoothClicked()
         {
             Console.WriteLine("yeet");
+            
         }
 
         async void RecordAudio()
