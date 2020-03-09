@@ -9,9 +9,7 @@ using RVCC;
 
 namespace RVCC
 {
-    // Learn more about making custom code visible in the Xamarin.Forms previewer
-    // by visiting https://aka.ms/xamarinforms-previewer
-    [DesignTimeVisible(false)]
+
     public partial class MainPage : ContentPage
     {
 
@@ -20,6 +18,8 @@ namespace RVCC
         public MainPage()
         {
             InitializeComponent();
+            BindingContext = ViewModel;
+
             var tapBluetooth = new TapGestureRecognizer();
             tapBluetooth.Tapped += (s, e) =>
             {
@@ -38,13 +38,19 @@ namespace RVCC
         }
         private void BluetoothClicked()
         {
-            ViewModel.BluetoothTextColor = Color.LightGray;
-            
+            Console.WriteLine("test");
+            ViewModel.BluetoothTextColor = Color.Gray;
+            ViewModel.AudioTextColor = Color.Black;
+            ViewModel.BluetoothTextString = "Pair Bluetooth (Paired)";
+            ViewModel.AudioTextString = "Record Audio (Enabled)";
         }
 
         async void RecordAudio()
         {
-            Console.WriteLine("yeet2");
+            ViewModel.BluetoothTextColor = Color.FromHex("194C90");
+            ViewModel.AudioTextColor = Color.Gray;
+            ViewModel.BluetoothTextString = "Pair Bluetooth (Unpaired)";
+            ViewModel.AudioTextString = "Record Audio (Disabled)";
         }
     }
 }

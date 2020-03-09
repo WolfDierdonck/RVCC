@@ -3,25 +3,31 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:d="http://xamarin.com/schemas/2014/forms/design"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:vm="clr-namespace:RVCC"
              mc:Ignorable="d"
              x:Class="RVCC.MainPage">
 
+    <ContentPage.BindingContext>
+        <vm:MainViewModel/>
+    </ContentPage.BindingContext>
+    
+    
     <StackLayout>
-        <Grid RowSpacing="25">
+        <Grid RowSpacing="25" VerticalOptions="Center" HorizontalOptions="Center" TranslationY="330">
             <Grid.RowDefinitions>
-                <RowDefinition Height="350" />
-                <RowDefinition Height="*" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
             </Grid.RowDefinitions>
             <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="*" />
-                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="Auto" />
+                <ColumnDefinition Width="Auto" />
             </Grid.ColumnDefinitions>
 
-            <Image x:Name="microphoneImage" Source="microphoneIcon" Grid.Row="0" Grid.Column="0" HeightRequest="40" HorizontalOptions="End" VerticalOptions="End" TranslationX="-40" BackgroundColor="{Binding BluetoothTextColor}"/>
-            <Label x:Name="microphoneText" Text="Record Audio" Grid.Row="0" Grid.Column="1" HorizontalOptions="Start" VerticalOptions="End" TranslationX="-40" FontSize="Large"/>
+            <Image x:Name="microphoneImage" Source="microphoneIcon" Grid.Row="0" Grid.Column="0" HeightRequest="40" HorizontalOptions="End"/>
+            <Label x:Name="microphoneText" Text="{Binding AudioTextString}" Grid.Row="0" Grid.Column="1" TextColor="{Binding AudioTextColor}" HorizontalOptions="Start" FontSize="20"/>
 
-            <Image x:Name="bluetoothImage" Source="bluetoothIcon" Grid.Row="1" Grid.Column="0" HeightRequest="20" HorizontalOptions="End" VerticalOptions="Start" TranslationX="-30"/>
-            <Label x:Name="bluetoothText" Text="Pair Bluetooth" Grid.Row="1" Grid.Column="1" HorizontalOptions="Start" VerticalOptions="Start" TranslationX="-30" />
+            <Image x:Name="bluetoothImage" Source="bluetoothIcon" Grid.Row="1" Grid.Column="0" HeightRequest="20" HorizontalOptions="End" TranslationX="20"/>
+            <Label x:Name="bluetoothText" Text="{Binding BluetoothTextString}" Grid.Row="1" Grid.Column="1" TextColor="{Binding BluetoothTextColor}" HorizontalOptions="Start" TranslationX="20"/>
 
         </Grid>
     </StackLayout>
