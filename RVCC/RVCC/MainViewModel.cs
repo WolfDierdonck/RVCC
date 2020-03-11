@@ -13,6 +13,8 @@ namespace RVCC
             AudioTextColor = Color.Gray;
             BluetoothTextString = "Pair Bluetooth (Unpaired)";
             AudioTextString = "Record Audio (Disabled)";
+            CurCommandString = "No Current Command";
+            RecognizeString = "";
         }
 
         private Color bluetoothTextColor;
@@ -52,6 +54,26 @@ namespace RVCC
             set
             {
                 SetProperty(ref audioTextString, value);
+            }
+        }
+
+        private string curCommandString;
+        public string CurCommandString
+        {
+            get { return curCommandString; }
+            set
+            {
+                SetProperty(ref curCommandString, value);
+            }
+        }
+
+        private string recognizeString;
+        public string RecognizeString
+        {
+            get { return recognizeString; }
+            set
+            {
+                SetProperty(ref recognizeString, value);
             }
         }
     }

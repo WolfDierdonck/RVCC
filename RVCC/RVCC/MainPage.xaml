@@ -13,10 +13,14 @@
     
     
     <StackLayout>
-        <Grid RowSpacing="25" VerticalOptions="Center" HorizontalOptions="Center" TranslationY="330">
+        <Label Text="Current Command:" HorizontalOptions="Center" TextDecorations="Underline" TranslationY="100" FontSize="20"/>
+        <Label Text="{Binding CurCommandString}" HorizontalOptions="Center" TranslationY="100" FontSize="15"/>
+        <Label Text="{Binding RecognizeString}" HorizontalOptions="Center" TranslationY="100" FontSize="15"/>
+        <Grid RowSpacing="25" VerticalOptions="Center" HorizontalOptions="Center" TranslationY="280">
             <Grid.RowDefinitions>
                 <RowDefinition Height="Auto" />
                 <RowDefinition Height="Auto" />
+                <RowDefinition Height="50" />
             </Grid.RowDefinitions>
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="Auto" />
@@ -28,6 +32,8 @@
 
             <Image x:Name="bluetoothImage" Source="bluetoothIcon" Grid.Row="1" Grid.Column="0" HeightRequest="20" HorizontalOptions="End" TranslationX="20"/>
             <Label x:Name="bluetoothText" Text="{Binding BluetoothTextString}" Grid.Row="1" Grid.Column="1" TextColor="{Binding BluetoothTextColor}" HorizontalOptions="Start" TranslationX="20"/>
+
+            <Label x:Name="commandListText" Text="View Command List" HorizontalOptions="Center" TextDecorations="Underline" TextColor="OrangeRed" Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="2" VerticalOptions="End"/>
 
         </Grid>
     </StackLayout>
