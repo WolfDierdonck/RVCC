@@ -21,6 +21,18 @@ namespace RVCC
 
         public static MainViewModel ViewModel => App.ViewModel;
 
+        public static IDictionary<string, int> commands = new Dictionary<string, int>()
+        {
+            {"Go", 1},
+            {"Speed up", 2},
+            {"Slow down", 3},
+            {"Stop", 4},
+            {"Go left", 5},
+            {"Go right", 6 },
+            {"Right", 7 },
+            {"Left", 8 }
+        };
+
         public MainPage()
         {
             InitializeComponent();
@@ -80,7 +92,7 @@ namespace RVCC
             speechMessage = char.ToUpper(args[0]) + args.Substring(1); ;
             ViewModel.CurCommandString = speechMessage;
 
-            if (speechMessage == "go" || speechMessage == "stop" || speechMessage == "left" || speechMessage == "right") {
+            if (commands.ContainsKey(speechMessage)) {
                 ViewModel.RecognizeString = "(Recognized command)";
             }
             else
