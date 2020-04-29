@@ -10,6 +10,7 @@ using RVCC;
 using Android.Content;
 using Android.Speech;
 using Xamarin.Forms;
+using System.Collections.Generic;
 
 namespace RVCC.Droid
 {
@@ -33,20 +34,68 @@ namespace RVCC.Droid
             {
                 if (resultCode == Result.Ok)
                 {
-                    var matches = data.GetStringArrayListExtra(RecognizerIntent.ExtraResults);
-                    if (matches.Count != 0)
+                    IList<String> tempMatches = data.GetStringArrayListExtra(RecognizerIntent.ExtraResults);
+                    if (tempMatches.Count != 0)
                     {
-                        string textInput = matches[0];
-                        MessagingCenter.Send<IMessageSender, string>(this, "STT", textInput);
-                    }
-                    else
-                    {
-                        MessagingCenter.Send<IMessageSender, string>(this, "STT", "No input");
+
+                        List<String> matches = new List<String>(tempMatches);
+                        matches = matches.ConvertAll(d => d.ToLower());
+
+                        if (matches.Contains("left")) 
+                        { 
+                            MessagingCenter.Send<IMessageSender, string>(this, "Left", null);
+                        } 
+                        else if (matches.Contains("stop"))
+                        {
+                            MessagingCenter.Send<IMessageSender, string>(this, "Stop", null);
+                        }
+                        else if (matches.Contains("go"))
+                        {
+                            MessagingCenter.Send<IMessageSender, string>(this, "Go", null);
+                        }
+                        else if (matches.Contains("go left"))
+                        {
+                            MessagingCenter.Send<IMessageSender, string>(this, "Go left", null);
+                        }
+                        else if (matches.Contains("right") || matches.Contains("height") || matches.Contains("hertz") || matches.Contains("heights") || matches.Contains("light") || matches.Contains("lights"))
+                        {
+                            MessagingCenter.Send<IMessageSender, string>(this, "Right", null);
+                        } 
+                        else if (matches.Contains("go right") || matches.Contains("go height") || matches.Contains("go hertz") || matches.Contains("go heights") || matches.Contains("go light") || matches.Contains("go lights"))
+                        {
+                            MessagingCenter.Send<IMessageSender, string>(this, "Go right", null);
+                        }
+                        else
+                        {
+                            MessagingCenter.Send<IMessageSender, string>(this, "Nothing", matches[0]);
+                        }
+                        
                     }
 
                 }
             }
             base.OnActivityResult(requestCode, resultCode, data);
+        }
+
+        public bool SendBluetooth(int[] vars)
+        {
+            Array.ForEach(vars, Console.Write);
+            Console.WriteLine();
+
+            bool success = true;
+
+            //Connect to Bluetooth
+            
+            //Send data
+
+            if (success == true)
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
         }
     }
 }

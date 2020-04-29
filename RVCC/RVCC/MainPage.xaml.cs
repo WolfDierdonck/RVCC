@@ -17,21 +17,10 @@ namespace RVCC
         public static bool paired = false;
 
         private ISpeechToText _speechRecongnitionInstance;
-        private string speechMessage;
+        private IBluetooth _bluetoothInstance;
 
         public static MainViewModel ViewModel => App.ViewModel;
 
-        public static IDictionary<string, int> commands = new Dictionary<string, int>()
-        {
-            {"Go", 1},
-            {"Speed up", 2},
-            {"Slow down", 3},
-            {"Stop", 4},
-            {"Go left", 5},
-            {"Go right", 6 },
-            {"Right", 7 },
-            {"Left", 8 }
-        };
 
         public MainPage()
         {
@@ -40,6 +29,7 @@ namespace RVCC
             try
             {
                 _speechRecongnitionInstance = DependencyService.Get<ISpeechToText>();
+                _bluetoothInstance = DependencyService.Get<IBluetooth>();
             }
             catch (Exception ex)
             {
@@ -48,6 +38,7 @@ namespace RVCC
 
             BindingContext = ViewModel;
 
+            #region gestures
             var tapBluetooth = new TapGestureRecognizer();
             tapBluetooth.Tapped += (s, e) =>
             {
@@ -70,37 +61,83 @@ namespace RVCC
                 ViewCommandList();
             };
             commandListText.GestureRecognizers.Add(tapCommandList);
+            #endregion gestures
 
-            MessagingCenter.Subscribe<ISpeechToText, string>(this, "STT", (sender, args) =>
-            {
-                SpeechToTextFinalResultRecieved(args);
-            });
-
-            MessagingCenter.Subscribe<IMessageSender, string>(this, "STT", (sender, args) =>
-            {
-                SpeechToTextFinalResultRecieved(args);
-            });
-        }
-
-        private void ViewCommandList()
-        {
-            Console.WriteLine("test");
-        }
-
-        private void SpeechToTextFinalResultRecieved(string args)
-        {
-            speechMessage = char.ToUpper(args[0]) + args.Substring(1); ;
-            ViewModel.CurCommandString = speechMessage;
-
-            if (commands.ContainsKey(speechMessage)) {
+            #region messagingCenters
+            MessagingCenter.Subscribe<IMessageSender, string>(this, "Left", (sender, args) => {
                 ViewModel.RecognizeString = "(Recognized command)";
-            }
-            else
+                ViewModel.CurCommandString = "Left";
+
+                int[] vars = new int[2] { 1, 3 };
+
+                try
+                {
+                    _bluetoothInstance.SendMessage(vars);
+                }
+                catch (Exception ex)
+                {
+                    Console.WriteLine(ex.Message);
+                }
+            });
+
+            MessagingCenter.Subscribe<IMessageSender, string>(this, "Stop", (sender, args) => {
+                ViewModel.RecognizeString = "(Recognized command)";
+                ViewModel.CurCommandString = "Stop";
+            });
+
+            MessagingCenter.Subscribe<IMessageSender, string>(this, "Go", (sender, args) => {
+                ViewModel.RecognizeString = "(Recognized command)";
+                ViewModel.CurCommandString = "Go";
+            });
+
+            MessagingCenter.Subscribe<IMessageSender, string>(this, "Go left", (sender, args) => {
+                ViewModel.RecognizeString = "(Recognized command)";
+                ViewModel.CurCommandString = "Go left";
+            });
+
+            MessagingCenter.Subscribe<IMessageSender, string>(this, "Right", (sender, args) => {
+                ViewModel.RecognizeString = "(Recognized command)";
+                ViewModel.CurCommandString = "Right";
+            });
+
+            MessagingCenter.Subscribe<IMessageSender, string>(this, "Go right", (sender, args) => {
+                ViewModel.RecognizeString = "(Recognized command)";
+                ViewModel.CurCommandString = "Go right";
+            });
+
+            MessagingCenter.Subscribe<IMessageSender, string>(this, "Nothing", (sender, args) =>
             {
                 ViewModel.RecognizeString = "(Not a recognized command)";
-            }
+                ViewModel.CurCommandString = args;
+            });
 
+            #endregion messagingCenters
         }
+
+        private async void ViewCommandList()
+        {
+            StackLayout stackLayout = CommandList.CreateCommandList();
+
+            Label close = new Label { Text = "Close", FontSize = 20, TextColor = Color.HotPink, VerticalOptions=LayoutOptions.End};
+
+            var tapClose = new TapGestureRecognizer();
+            tapClose.Tapped += (s, e) =>
+            {
+                Navigation.PopModalAsync();
+            };
+            close.GestureRecognizers.Add(tapClose);
+
+            stackLayout.Children.Add(close);
+
+
+            ContentPage contentPage = new ContentPage
+            {
+                Content = stackLayout,
+            };
+
+            await Navigation.PushModalAsync(contentPage);
+        }
+
         private void BluetoothClicked()
         {
             paired = true;
@@ -108,6 +145,7 @@ namespace RVCC
             ViewModel.AudioTextColor = Color.Black;
             ViewModel.BluetoothTextString = "Pair Bluetooth (Paired)";
             ViewModel.AudioTextString = "Record Audio (Enabled)";
+            
         }
 
         private void RecordAudio()
