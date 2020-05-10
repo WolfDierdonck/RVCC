@@ -69,11 +69,7 @@ namespace RVCC
         {
             ViewModel.RecognizeString = recognize;
             ViewModel.CurCommandString = message;
-            if (recognize != "(Not a recognized command)")
-            {
-                Console.WriteLine(message);
-                _bluetoothInstance.Send(message);
-            }
+            _bluetoothInstance.Send(message);  
         }
 
         private async void ViewCommandList()
@@ -104,6 +100,7 @@ namespace RVCC
         {
             List<String> devices = _bluetoothInstance.GetDevices();
             string name = "DSD TECH HC-05";
+            ViewModel.BluetoothTextString = "Attempting to Pair...";
 
             if (devices.Contains(name) && paired == false)
             {

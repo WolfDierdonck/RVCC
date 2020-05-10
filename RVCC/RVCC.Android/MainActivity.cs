@@ -49,27 +49,27 @@ namespace RVCC.Droid
 
                         if (matches.Contains("left")) 
                         {
-                            mainPage.DisplayResult("Left", "(Recognized Command)");
+                            mainPage.DisplayResult("left", "(Recognized Command)");
                         } 
                         else if (matches.Contains("stop"))
                         {
-                            mainPage.DisplayResult("Stop", "(Recognized Command)");
+                            mainPage.DisplayResult("stop", "(Recognized Command)");
                         }
                         else if (matches.Contains("go"))
                         {
-                            mainPage.DisplayResult("Go", "(Recognized Command)");
+                            mainPage.DisplayResult("go", "(Recognized Command)");
                         }
                         else if (matches.Contains("go left"))
                         {
-                            mainPage.DisplayResult("Go Left", "(Recognized Command)");
+                            mainPage.DisplayResult("go left", "(Recognized Command)");
                         }
-                        else if (matches.Contains("right") || matches.Contains("height") || matches.Contains("hertz") || matches.Contains("heights") || matches.Contains("light") || matches.Contains("lights"))
+                        else if (matches.Contains("right") || matches.Contains("height") || matches.Contains("hertz") || matches.Contains("heights") || matches.Contains("light") || matches.Contains("lights") || matches.Contains("crates"))
                         {
-                            mainPage.DisplayResult("Right", "(Recognized Command)");
+                            mainPage.DisplayResult("right", "(Recognized Command)");
                         } 
                         else if (matches.Contains("go right") || matches.Contains("go height") || matches.Contains("go hertz") || matches.Contains("go heights") || matches.Contains("go light") || matches.Contains("go lights"))
                         {
-                            mainPage.DisplayResult("Go Right", "(Recognized Command)");
+                            mainPage.DisplayResult("go right", "(Recognized Command)");
                         }
                         else
                         {
