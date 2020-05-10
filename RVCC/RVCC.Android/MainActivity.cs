@@ -11,6 +11,7 @@ using Android.Content;
 using Android.Speech;
 using Xamarin.Forms;
 using System.Collections.Generic;
+using Android.Bluetooth;
 
 namespace RVCC.Droid
 {
@@ -26,6 +27,10 @@ namespace RVCC.Droid
             base.OnCreate(savedInstanceState);
             global::Xamarin.Forms.Forms.Init(this, savedInstanceState);
             LoadApplication(new App());
+
+            BluetoothReceiver receiver = new BluetoothReceiver();
+            IntentFilter disconnect = new IntentFilter(BluetoothDevice.ActionAclDisconnected);
+            RegisterReceiver(receiver, disconnect);
         }
         protected override void OnActivityResult(int requestCode, Result resultCode, Intent data)
         {

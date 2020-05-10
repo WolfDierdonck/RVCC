@@ -120,6 +120,15 @@ namespace RVCC
             ViewModel.AudioTextString = "Record Audio (Enabled)";
         }
 
+        public static void BluetoothDisconnect()
+        {
+            paired = false;
+            ViewModel.BluetoothTextColor = Color.FromHex("194C90");
+            ViewModel.AudioTextColor = Color.Gray;
+            ViewModel.BluetoothTextString = "Pair Bluetooth (Unpaired)";
+            ViewModel.AudioTextString = "Record Audio (Disabled)";
+        }
+
         private void RecordAudio()
         {
             if (paired == true)
