@@ -1,20 +1,12 @@
 # TO DO
 
 ### Mobile App
-1. Get Voice Input (Already implemented, but not a custom one instead simply copy-paste from Google)
-2. Recognize basic voice inputs
-3. Create command list page
-4. Be able to pair Bluetooth
-5. Send data over Bluetooth to Arduino
+1. Remove  popup when getting audio input
 
 ### Arduino
-1. Output electrical signals
-2. Convert basic commands into proper output
-3. Connect Arduino to toy car
-4. Recieve data over Bluetooth from mobile app
-5. Convert data into commands
+1. Connect Arduino to RC car
+2. Turn commands into the correct outputs
 
-### Potential functions
+### Extra Potential functions
 - Custom commands
-- Change basic command names
  
