@@ -40,34 +40,35 @@ namespace RVCC.Droid
 
                         List<String> matches = new List<String>(tempMatches);
                         matches = matches.ConvertAll(d => d.ToLower());
+                        MainPage mainPage = new MainPage();
 
                         if (matches.Contains("left")) 
-                        { 
-                            MessagingCenter.Send<IMessageSender, string>(this, "Left", null);
+                        {
+                            mainPage.DisplayResult("Left", "(Recognized Command)");
                         } 
                         else if (matches.Contains("stop"))
                         {
-                            MessagingCenter.Send<IMessageSender, string>(this, "Stop", null);
+                            mainPage.DisplayResult("Stop", "(Recognized Command)");
                         }
                         else if (matches.Contains("go"))
                         {
-                            MessagingCenter.Send<IMessageSender, string>(this, "Go", null);
+                            mainPage.DisplayResult("Go", "(Recognized Command)");
                         }
                         else if (matches.Contains("go left"))
                         {
-                            MessagingCenter.Send<IMessageSender, string>(this, "Go left", null);
+                            mainPage.DisplayResult("Go Left", "(Recognized Command)");
                         }
                         else if (matches.Contains("right") || matches.Contains("height") || matches.Contains("hertz") || matches.Contains("heights") || matches.Contains("light") || matches.Contains("lights"))
                         {
-                            MessagingCenter.Send<IMessageSender, string>(this, "Right", null);
+                            mainPage.DisplayResult("Right", "(Recognized Command)");
                         } 
                         else if (matches.Contains("go right") || matches.Contains("go height") || matches.Contains("go hertz") || matches.Contains("go heights") || matches.Contains("go light") || matches.Contains("go lights"))
                         {
-                            MessagingCenter.Send<IMessageSender, string>(this, "Go right", null);
+                            mainPage.DisplayResult("Go Right", "(Recognized Command)");
                         }
                         else
                         {
-                            MessagingCenter.Send<IMessageSender, string>(this, "Nothing", matches[0]);
+                            mainPage.DisplayResult(matches[0], "(Not a recognized command)");
                         }
                         
                     }

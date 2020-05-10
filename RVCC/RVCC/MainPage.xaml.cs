@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 using Xamarin.Forms;
 using RVCC;
 using Plugin.Toast;
+using Xamarin.Forms.Xaml;
 
 namespace RVCC
 {
@@ -62,56 +63,17 @@ namespace RVCC
             };
             commandListText.GestureRecognizers.Add(tapCommandList);
             #endregion gestures
+        }
 
-            #region messagingCenters
-            MessagingCenter.Subscribe<IMessageSender, string>(this, "Left", (sender, args) => {
-                ViewModel.RecognizeString = "(Recognized command)";
-                ViewModel.CurCommandString = "Left";
-
-                int[] vars = new int[2] { 1, 3 };
-
-                try
-                {
-                    _bluetoothInstance.SendMessage(vars);
-                }
-                catch (Exception ex)
-                {
-                    Console.WriteLine(ex.Message);
-                }
-            });
-
-            MessagingCenter.Subscribe<IMessageSender, string>(this, "Stop", (sender, args) => {
-                ViewModel.RecognizeString = "(Recognized command)";
-                ViewModel.CurCommandString = "Stop";
-            });
-
-            MessagingCenter.Subscribe<IMessageSender, string>(this, "Go", (sender, args) => {
-                ViewModel.RecognizeString = "(Recognized command)";
-                ViewModel.CurCommandString = "Go";
-            });
-
-            MessagingCenter.Subscribe<IMessageSender, string>(this, "Go left", (sender, args) => {
-                ViewModel.RecognizeString = "(Recognized command)";
-                ViewModel.CurCommandString = "Go left";
-            });
-
-            MessagingCenter.Subscribe<IMessageSender, string>(this, "Right", (sender, args) => {
-                ViewModel.RecognizeString = "(Recognized command)";
-                ViewModel.CurCommandString = "Right";
-            });
-
-            MessagingCenter.Subscribe<IMessageSender, string>(this, "Go right", (sender, args) => {
-                ViewModel.RecognizeString = "(Recognized command)";
-                ViewModel.CurCommandString = "Go right";
-            });
-
-            MessagingCenter.Subscribe<IMessageSender, string>(this, "Nothing", (sender, args) =>
+        public void DisplayResult(string message, string recognize)
+        {
+            ViewModel.RecognizeString = recognize;
+            ViewModel.CurCommandString = message;
+            if (recognize != "(Not a recognized command)")
             {
-                ViewModel.RecognizeString = "(Not a recognized command)";
-                ViewModel.CurCommandString = args;
-            });
-
-            #endregion messagingCenters
+                Console.WriteLine(message);
+                _bluetoothInstance.Send(message);
+            }
         }
 
         private async void ViewCommandList()
@@ -140,12 +102,22 @@ namespace RVCC
 
         private void BluetoothClicked()
         {
+            List<String> devices = _bluetoothInstance.GetDevices();
+            string name = "DSD TECH HC-05";
+
+            if (devices.Contains(name) && paired == false)
+            {
+                _bluetoothInstance.PairDevice(name);
+            }
+        }
+
+        public static void BluetoothConnect()
+        {
             paired = true;
             ViewModel.BluetoothTextColor = Color.Gray;
             ViewModel.AudioTextColor = Color.Black;
             ViewModel.BluetoothTextString = "Pair Bluetooth (Paired)";
             ViewModel.AudioTextString = "Record Audio (Enabled)";
-            
         }
 
         private void RecordAudio()

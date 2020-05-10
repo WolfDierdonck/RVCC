@@ -1,6 +1,10 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Collections.ObjectModel;
 
 public interface IBluetooth
 {
-    bool SendMessage(int[] vars);
+    void PairDevice(string name);
+    void Send(string message);
+    List<String> GetDevices();
 }
