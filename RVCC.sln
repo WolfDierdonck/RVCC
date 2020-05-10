@@ -7,13 +7,6 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RVCC.Android", "RVCC\RVCC.A
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RVCC", "RVCC\RVCC\RVCC.csproj", "{760A06D9-647D-42D3-A4EF-38886EDAE5EC}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Arduino", "Arduino", "{2F25C9CE-6208-4A39-8740-A996D6B4673A}"
-EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "rvccCode", "rvccCode", "{3CF20BC9-5CB2-4782-AB33-F48F33A1BDA8}"
-	ProjectSection(SolutionItems) = preProject
-		..\Arduino\rvccCode\rvccCode.ino = ..\Arduino\rvccCode\rvccCode.ino
-	EndProjectSection
-EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -35,9 +28,6 @@ Global
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
-	EndGlobalSection
-	GlobalSection(NestedProjects) = preSolution
-		{3CF20BC9-5CB2-4782-AB33-F48F33A1BDA8} = {2F25C9CE-6208-4A39-8740-A996D6B4673A}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {C47E74D3-A513-4BE7-851C-384A323011AB}
