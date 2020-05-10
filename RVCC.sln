@@ -5,7 +5,7 @@ VisualStudioVersion = 16.0.29424.173
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RVCC.Android", "RVCC\RVCC.Android\RVCC.Android.csproj", "{8260A1D7-2CFA-4C75-B53C-AE9F5D91D9D2}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RVCC", "RVCC\RVCC\RVCC.csproj", "{760A06D9-647D-42D3-A4EF-38886EDAE5EC}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RVCC", "RVCC\RVCC\RVCC.csproj", "{760A06D9-647D-42D3-A4EF-38886EDAE5EC}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
