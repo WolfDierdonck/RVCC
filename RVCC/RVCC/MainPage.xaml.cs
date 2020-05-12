@@ -100,7 +100,10 @@ namespace RVCC
         {
             List<String> devices = _bluetoothInstance.GetDevices();
             string name = "DSD TECH HC-05";
-            ViewModel.BluetoothTextString = "Attempting to Pair...";
+            if (paired == false)
+            {
+                ViewModel.BluetoothTextString = "Attempting to Pair...";
+            }
 
             if (devices.Contains(name) && paired == false)
             {
