@@ -1,53 +1,75 @@
- char t;
-String test;
+#include <AFMotor.h>
 
-int redPin = 2;
-int bluePin = 3;
-int greenPin = 4;
-int yellowPin = 5;
+AF_DCMotor speedMotor(2, MOTOR12_1KHZ); 
+AF_DCMotor turnMotor(3, MOTOR34_1KHZ);
+char character;
+String command;
 
 void setup() {
   Serial.begin(9600);
-  pinMode(redPin, OUTPUT);
-  pinMode(bluePin, OUTPUT);
-  pinMode(greenPin, OUTPUT);
-  pinMode(yellowPin, OUTPUT);
 }
 
 void loop() {
   while (Serial.available()) {
     delay(20);
-    t = Serial.read();
-    test +=t;
+    character = Serial.read();
+    command += character;
   }
-  if (test.length()>0) {
-    Serial.println(test);
-    if (test == "Left") {
-      Serial.println("Pin 2 ON");
-      digitalWrite(redPin, HIGH);
-      delay(1000);
-      digitalWrite(redPin, LOW);
+  if (command.length()>0) {
+    Serial.print("[");
+    Serial.print(command);
+    Serial.println("]");
+    if (command == "forwards" || command == "go") {
+      Serial.println(command);
+      speedMotor.setSpeed(255);
+      speedMotor.run(BACKWARD);
     }
-    else if (test == "Right") {
-      Serial.println("Pin 3 ON");
-      digitalWrite(bluePin, HIGH);
-      delay(1000);
-      digitalWrite(bluePin, LOW);
+    else if (command == "backwards") {
+      Serial.println(command);
+      speedMotor.setSpeed(255);
+      speedMotor.run(FORWARD);
     }
-    else if (test == "Stop") {
-      Serial.println("Pin 4 ON");
-      digitalWrite(greenPin, HIGH);
-      delay(1000);
-      digitalWrite(greenPin, LOW);
+    else if (command == "stop") {
+      Serial.println(command);
+      speedMotor.setSpeed(0);
+      speedMotor.run(RELEASE);
     }
-    else if (test == "Go") {
-      Serial.println("Pin 5 ON");
-      digitalWrite(yellowPin, HIGH);
-      delay(1000);
-      digitalWrite(yellowPin, LOW);
+    else if (command == "left") {
+      Serial.println(command);
+      turnMotor.setSpeed(255);
+      turnMotor.run(BACKWARD);
+      delay(50);
+      turnMotor.setSpeed(0);
+      turnMotor.run(RELEASE);
     }
-    test = "";
+    else if (command == "go left") {
+      Serial.println(command);
+      speedMotor.setSpeed(255);
+      speedMotor.run(BACKWARD);
+      turnMotor.setSpeed(255);
+      turnMotor.run(BACKWARD);
+      delay(50);
+      turnMotor.setSpeed(0);
+      turnMotor.run(RELEASE);
+    }
+    else if (command == "right") {
+      Serial.println(command);
+      turnMotor.setSpeed(255);
+      turnMotor.run(FORWARD);
+      delay(50);
+      turnMotor.setSpeed(0);
+      turnMotor.run(RELEASE);
+    }
+    else if (command == "go right") {
+      Serial.println(command);
+      speedMotor.setSpeed(255);
+      speedMotor.run(BACKWARD);
+      turnMotor.setSpeed(255);
+      turnMotor.run(FORWARD);
+      delay(50);
+      turnMotor.setSpeed(0);
+      turnMotor.run(RELEASE);
+    }
+    command = "";
   }
-  
-  
 }
