@@ -46,62 +46,36 @@ namespace RVCC.Droid
                         List<String> matches = new List<String>(tempMatches);
                         matches = matches.ConvertAll(d => d.ToLower());
                         MainPage mainPage = new MainPage();
+                        List<String> commands = new List<String>() { "forwards", "backwards", "go", "stop", "left", "go left", "right", "go right" };
 
-                        if (matches.Contains("left")) 
+                        bool foundCommand = false;
+
+                        foreach (String command in matches)
                         {
-                            mainPage.DisplayResult("left", "(Recognized Command)");
-                        } 
-                        else if (matches.Contains("stop"))
-                        {
-                            mainPage.DisplayResult("stop", "(Recognized Command)");
+                            if (commands.Contains(command)) {
+                                mainPage.DisplayResult(command, "(Recognized Command)");
+                                foundCommand = true;
+                            }
                         }
-                        else if (matches.Contains("go"))
-                        {
-                            mainPage.DisplayResult("go", "(Recognized Command)");
-                        }
-                        else if (matches.Contains("go left"))
-                        {
-                            mainPage.DisplayResult("go left", "(Recognized Command)");
-                        }
-                        else if (matches.Contains("right") || matches.Contains("height") || matches.Contains("hertz") || matches.Contains("heights") || matches.Contains("light") || matches.Contains("lights") || matches.Contains("crates"))
+                        if (matches.Contains("right") || matches.Contains("height") || matches.Contains("hertz") || matches.Contains("heights") || matches.Contains("light") || matches.Contains("lights") || matches.Contains("crates"))
                         {
                             mainPage.DisplayResult("right", "(Recognized Command)");
-                        } 
+                            foundCommand = true;
+                        }
                         else if (matches.Contains("go right") || matches.Contains("go height") || matches.Contains("go hertz") || matches.Contains("go heights") || matches.Contains("go light") || matches.Contains("go lights"))
                         {
                             mainPage.DisplayResult("go right", "(Recognized Command)");
+                            foundCommand = true;
                         }
-                        else
+                        if (foundCommand == false)
                         {
                             mainPage.DisplayResult(matches[0], "(Not a recognized command)");
-                        }
-                        
+                        }   
                     }
 
                 }
             }
             base.OnActivityResult(requestCode, resultCode, data);
-        }
-
-        public bool SendBluetooth(int[] vars)
-        {
-            Array.ForEach(vars, Console.Write);
-            Console.WriteLine();
-
-            bool success = true;
-
-            //Connect to Bluetooth
-            
-            //Send data
-
-            if (success == true)
-            {
-                return true;
-            }
-            else
-            {
-                return false;
-            }
         }
     }
 }
